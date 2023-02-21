@@ -280,10 +280,14 @@ if(BUILD_CLIENT OR BUILD_SERVER)
 			find_package(SQLite3 REQUIRED)
 			target_link_libraries(engine_libraries INTERFACE ${SQLITE3_LIBRARY})
 			target_include_directories(engine_libraries INTERFACE ${SQLITE3_INCLUDE_DIR})
+			target_link_libraries(qagame_libraries INTERFACE ${SQLITE3_LIBRARY})
+			target_include_directories(qagame_libraries INTERFACE ${SQLITE3_INCLUDE_DIR})
 		else() # BUNDLED_SQLITE3
 			target_link_libraries(engine_libraries INTERFACE bundled_sqlite3)
+			target_link_libraries(qagame_libraries INTERFACE bundled_sqlite3)
 		endif()
 		target_compile_definitions(engine_libraries INTERFACE FEATURE_DBMS)
+		target_compile_definitions(qagame_libraries INTERFACE FEATURE_DBMS)
 
 		FILE(GLOB DBMS_SRC
 			"src/db/db_sql.h"
